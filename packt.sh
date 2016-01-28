@@ -57,4 +57,13 @@ log "Packt logout"
 
 rm -f $cookie packt*.html
 
+# Rename ebooks
+newTitle=`echo $title | tr ' ' '\0'`
+echo $newTitle
+mv "$dldir/${title}.mobi" "$dldir/${newTitle}.mobi"
+mv "$dldir/${title}.pdf" "$dldir/${newTitle}.pdf"
+
+# Send Email
+mutt -s "${newTitle}" 523200983@qq.com -a "$dldir/${newTitle}.mobi" "$dldir/${newTitle}.pdf" < /dev/null
+
 # end
